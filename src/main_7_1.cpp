@@ -200,6 +200,7 @@ void drawSkyBox(obj::Model * model, glm::mat4 modelMatrix, GLuint textureId)
 
 void renderScene()
 {
+	float time = glutGet(GLUT_ELAPSED_TIME) / 1000.0f
 	// Update of camera and perspective matrices
 	cameraMatrix = createCameraMatrix();
 	perspectiveMatrix = Core::createPerspectiveMatrix();
@@ -208,7 +209,7 @@ void renderScene()
 	glClearColor(0.0f, 0.1f, 0.3f, 1.0f);
 
 	glm::mat4 shipInitialTransformation = glm::translate(glm::vec3(0,-0.25f,0)) * glm::rotate(glm::radians(180.0f), glm::vec3(0,1,0)) * glm::scale(glm::vec3(0.25f));
-	glm::mat4 shipModelMatrix = glm::translate(cameraPos + cameraDir * 0.5f) * glm::mat4_cast(glm::inverse(rotation)) * shipInitialTransformation;
+	glm::mat4 shipModelMatrix = glm::translate(cameraPos + cameraDir * 0.5f) * glm::mat4_cast(glm::inverse(rotation)) * shipInitialTransformation * glm::translate(glm::vec3(0, 0, time * 0.1f));
 
 	//glm::mat4 skyBoxMatrix = glm::translate(glm::vec3(0, 0, 0)) * glm::scale(glm::vec3(10.0f));
 
